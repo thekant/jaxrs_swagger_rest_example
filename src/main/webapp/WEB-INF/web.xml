@@ -1,0 +1,55 @@
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Restful Web Application</display-name>
+
+	<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>com.kant.rest,io.swagger.jaxrs.listing</param-value>
+		</init-param>
+		<!-- <init-param> NOT NEEDED in v2.0 check pom for details -->
+		<!-- <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name> -->
+		<!-- <param-value>true</param-value> -->
+		<!-- </init-param> -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>SwaggerBootstrap</servlet-name>
+		<servlet-class>com.kant.rest.servlet.Bootstrap</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<filter>
+		<filter-name>CorsFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CorsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- <servlet> -->
+	<!-- <servlet-name>Jersey2Config</servlet-name> -->
+	<!-- <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class> -->
+	<!-- <init-param> -->
+	<!-- <param-name>api.version</param-name> -->
+	<!-- <param-value>1.0.0</param-value> -->
+	<!-- </init-param> -->
+	<!-- <init-param> -->
+	<!-- <param-name>swagger.api.basepath</param-name> -->
+	<!-- <param-value>http://localhost:8080/kantREST/rest</param-value> -->
+	<!-- </init-param> -->
+	<!-- <load-on-startup>2</load-on-startup> -->
+	<!-- </servlet> -->
+
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>
